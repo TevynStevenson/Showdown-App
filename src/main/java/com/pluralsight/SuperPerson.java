@@ -6,6 +6,11 @@ public class SuperPerson {
     private int health;
     private int experiencePoints;
 
+    public SuperPerson(String name, int health) {
+        this.name = name;
+        this.health = health;
+    }
+
     public String getName() {
         return name;
     }
@@ -19,10 +24,10 @@ public class SuperPerson {
     }
 
     public void setHealth(int health) {
+        //do some validation to make sure health is handled properly
         if(health >= 0){
             this.health = health;
         }
-
     }
 
     public int getExperiencePoints() {
@@ -30,28 +35,30 @@ public class SuperPerson {
     }
 
     public void setExperiencePoints(int experiencePoints) {
-        if(experiencePoints >= 0 ){
+        //do some validation to make sure health is handled properly
+        if(experiencePoints >= 0){
             this.experiencePoints = experiencePoints;
         }
     }
 
     public void takeDamage(int damage){
         if(damage >= 0){
-
-            this.health = Math.max(0,this.health - damage);
+            //make sure health doesnt go below 0
+            setHealth(Math.max(0, this.health - damage));
         }
     }
 
     public boolean isAlive(){
-        if(getHealth() > 0 );
+        //if the health is greater than 0 they are alive
         return getHealth() > 0;
     }
 
     public String getStatus(){
-        return String.format("%s has %d health", getName(),getHealth());
+        return String.format("%s has %d health", getName(), getHealth());
     }
 
     public void fight(SuperPerson opponent){
-        System.out.printf("%s prepare to fight %s \n", getName(), opponent.getName());
+        System.out.printf("%s prepares to fight %s%n", getName(), opponent.getName());
     }
+
 }
